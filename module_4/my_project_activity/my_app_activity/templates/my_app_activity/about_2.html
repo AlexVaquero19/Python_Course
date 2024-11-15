@@ -1,0 +1,17 @@
+{% extends 'my_app_activity/base.html' %}
+{% load static %}
+
+{% block cssCustom %}
+    <link rel="stylesheet" href="{% static 'my_app_activity/css/about.css' %}">
+{% endblock %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+    <div id="app">
+        <div class="content">
+            <span class="h1">About</span>
+            <span class="h3">Welcome to the "About" page</span>
+        </div>
+    </div>
+{% endblock %}

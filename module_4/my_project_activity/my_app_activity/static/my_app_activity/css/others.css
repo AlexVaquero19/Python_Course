@@ -1,0 +1,9 @@
+.content-others {
+    font-family: system-ui, sans-serif;
+    background: linear-gradient(to bottom, rgb(50, 99, 204), #2e238f);
+    color: white;
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+}

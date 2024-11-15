@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+    <h1>Users</h1>
+
+    <h2>Creation of Users</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Muestra el formulario -->
+
+        <button type="submit">Add User</button>
+    </form>
+
+    <h2>Users List</h2>
+    <ul>
+        {% for user in users %}
+            <li>
+                Name: {{ user.name }}<br/>
+                Username: {{ user.username }}<br/>
+                Surname: {{ user.surname }}</li>
+                City: {{ user.city }}</li>
+        {% empty %}
+            <li>No users found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

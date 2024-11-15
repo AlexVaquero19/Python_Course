@@ -1,0 +1,26 @@
+{% extends 'my_app_activity/base.html' %}
+
+{% block title %}Authors{% endblock %}
+
+{% block content %}
+    <h1>Authors</h1>
+
+    <h2>Add New Author</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Muestra el formulario -->
+        <button type="submit" class="btn btn-secondary">Add Author</button>
+    </form>
+
+    <h2 class="mt-5">Author List</h2>
+    <ul>
+        {% for author in authors %}
+            <li>
+                Author: {{ author.name }}<br/>
+                Mail: {{ author.email }}<br/>
+                Date of Birth: {{ author.date_of_birth }}</li>
+        {% empty %}
+            <li>No authors found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

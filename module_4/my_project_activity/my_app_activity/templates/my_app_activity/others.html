@@ -1,0 +1,18 @@
+{% extends 'my_app_activity/base.html' %}
+{% load static %}
+
+{% block title %}Others{% endblock %}
+
+{% block cssCustom %}
+    <link rel="stylesheet" href="{% static 'my_app_activity/css/others.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content-others">
+        <h1>👋 Hello, I'm Alejandro!</h1>
+        <div>
+            <span>Other Info About Me</span>
+            <p>I'm from Madrid (learning Django!!)</p>
+        </div>
+    </div>
+{% endblock %}
