@@ -1,4 +1,3 @@
-# python_application_development_course
+# Python Application Development Course
 
-Modules:
-
+Course of Python
