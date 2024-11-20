@@ -2,6 +2,10 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from .models import Author, Book, User
 from .forms import AuthorForm, UsersForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from rest_framework import viewsets, generics
+from .serializers import BookSerializer, AuthorSerializer
 
 # Create your views here.
 def home(request):
@@ -61,3 +65,41 @@ def base_with_logo(request):
 
 def base_with_js(request):
     return render(request, 'my_app_activity/base_with_js.html')
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/login')  # Redirects the user to the login page
+    else:
+        form = UserCreationForm()
+    return render(request, 'my_app_activity/register.html', {'form': form})
+
+@login_required
+def protected_profile(request):
+    return render(request, 'my_app_activity/protected_profile.html')
+
+@login_required
+def modify_user(request):
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/home')
+    else:
+        form = UserChangeForm(instance=request.user)
+    return render(request, 'my_app_activity/modify.html', {'form': form})
+
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+class AuthorListCreateView(generics.ListCreateAPIView):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+
+class AuthorDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+    
